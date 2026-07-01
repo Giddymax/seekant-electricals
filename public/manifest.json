@@ -1,0 +1,14 @@
+{
+  "name": "Seekant Electricals",
+  "short_name": "Seekant",
+  "description": "Seekant Electricals POS — electrical supplies, lighting, wiring and appliance retail management.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#111827",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/seekant-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/favicon.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}
