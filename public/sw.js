@@ -1,4 +1,4 @@
-const CACHE = "seekant-shell-v1";
+const CACHE = "seekant-shell-v2";
 const SHELL = ["/", "/manifest.json", "/seekant-logo.png", "/favicon.ico"];
 
 self.addEventListener("install", (event) => {

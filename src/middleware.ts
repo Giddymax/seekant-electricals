@@ -1,7 +1,17 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 const PUBLIC_PATHS = new Set(["/login"]);
-const OPEN_PREFIXES = ["/_next", "/api", "/manifest.json", "/sw.js", "/favicon.ico", "/seekant-logo", "/assets"];
+const OPEN_PREFIXES = [
+  "/_next",
+  "/api",
+  "/manifest.json",
+  "/sw.js",
+  "/favicon.ico",
+  "/favicon.png",
+  "/seekant-logo",
+  "/seekant-icon",
+  "/assets",
+];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
