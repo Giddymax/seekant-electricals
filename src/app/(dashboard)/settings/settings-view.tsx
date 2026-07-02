@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import type { PosSettings } from "@/lib/types";
 import { normalizeReceiptPrefix } from "@/lib/utils";
 import { resetSettings, saveSettings } from "../actions/settings";
+import { RestoreButton } from "./restore-button";
+import { BackupButton } from "@/components/BackupButton";
 
 export function SettingsView({ settings }: { settings: PosSettings }) {
   const [draft, setDraft] = useState<PosSettings>(settings);
@@ -166,6 +168,28 @@ export function SettingsView({ settings }: { settings: PosSettings }) {
               </p>
             </div>
             <p className="receipt-footer">{draft.receiptFooter}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="card storage-card" style={{ marginTop: 18 }}>
+        <div className="section-header">
+          <div>
+            <p className="eyebrow">Data Storage</p>
+            <h3 style={{ margin: 0, fontFamily: "var(--font-brand)", fontSize: "1.2rem" }}>
+              Backup, restore, and storage location
+            </h3>
+          </div>
+        </div>
+        <div className="storage-grid">
+          <div>
+            <p className="message">
+              Backups export your products, accounts, sales and settings into a JSON file.
+            </p>
+          </div>
+          <div className="button-row">
+            <BackupButton />
+            <RestoreButton />
           </div>
         </div>
       </div>

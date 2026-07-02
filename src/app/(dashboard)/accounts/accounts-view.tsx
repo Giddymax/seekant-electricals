@@ -5,8 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { PosUser } from "@/lib/types";
 import { deleteAccount, saveAccount } from "../actions/accounts";
-import { RestoreButton } from "./restore-button";
-import { BackupButton } from "@/components/BackupButton";
 
 type Draft = {
   id?: string;
@@ -144,34 +142,6 @@ export function AccountsView({ users }: { users: PosUser[] }) {
                 </div>
               </article>
             ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="card storage-card" style={{ marginTop: 18 }}>
-        <div className="section-header">
-          <div>
-            <p className="eyebrow">Data Storage</p>
-            <h3 style={{ margin: 0, fontFamily: "var(--font-brand)", fontSize: "1.2rem" }}>
-              Backup, restore, and storage location
-            </h3>
-          </div>
-        </div>
-        <div className="storage-grid">
-          <div>
-            <p>
-              <strong>Current Mode:</strong> Supabase Cloud Storage
-            </p>
-            <p>
-              <strong>Storage Path:</strong> Managed Postgres in your Supabase project.
-            </p>
-            <p className="message">
-              Backups export your products, accounts, sales and settings into a JSON file.
-            </p>
-          </div>
-          <div className="button-row">
-            <BackupButton />
-            <RestoreButton />
           </div>
         </div>
       </div>

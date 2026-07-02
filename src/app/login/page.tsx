@@ -11,7 +11,7 @@ async function loadSettings() {
     : {
         companyName: "Seekant Electricals",
         sidebarCopy: "Electrical supplies, lighting, wiring and appliance retail management",
-        receiptTitle: "Electrical Sales Receipt",
+        receiptTitle: "Sales Receipt",
         receiptPrefix: "SEL",
         receiptFooter: "Thank you for choosing Seekant Electricals.",
         documentTitle: "Seekant Electricals",
@@ -47,8 +47,8 @@ export default async function LoginPage() {
             </h2>
             <p className="hero-copy">
               From receiving cables and fittings to checkout, {settings.companyName} keeps
-              products, brands, SKUs, stock levels and electrical sales reports organized in
-              one system.
+              products, brands, Stock Keeping Units, stock levels and sales reports
+              organized in one system.
             </p>
           </div>
           <LoginForm />

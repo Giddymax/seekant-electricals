@@ -9,7 +9,7 @@ export async function loadSettings(): Promise<PosSettings> {
     return {
       companyName: "Seekant Electricals",
       sidebarCopy: "Electrical supplies, lighting, wiring and appliance retail management",
-      receiptTitle: "Electrical Sales Receipt",
+      receiptTitle: "Sales Receipt",
       receiptPrefix: "SEL",
       receiptFooter: "Thank you for choosing Seekant Electricals.",
       documentTitle: "Seekant Electricals",

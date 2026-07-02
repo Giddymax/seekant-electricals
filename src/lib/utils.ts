@@ -15,7 +15,7 @@ export function makeInventorySku(name: string) {
     .replace(/[^A-Z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
     .slice(0, 12);
-  return clean || "SKU";
+  return clean || "Stock Keeping Unit";
 }
 
 export function generateBarcode() {

@@ -86,7 +86,7 @@ export function HistoryView({
         <div>
           <p className="eyebrow">Transactions</p>
           <h3 style={{ margin: 0, fontFamily: "var(--font-brand)", fontSize: "1.35rem" }}>
-            Recent electrical sales and customer activity
+            Recent sales and customer activity
           </h3>
         </div>
       </div>
@@ -221,7 +221,7 @@ export function HistoryView({
           {historyList.length === 0 ? (
             <div className="empty-state">
               {sales.length === 0
-                ? "Electrical sales history is currently empty."
+                ? "Sales history is currently empty."
                 : "No sales matched your search."}
             </div>
           ) : (

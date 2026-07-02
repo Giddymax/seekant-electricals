@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { logout } from "@/app/login/actions";
-import { BackupButton } from "@/components/BackupButton";
 import type { PosUser } from "@/lib/types";
 
 export function TopBar({ user }: { user: PosUser }) {
@@ -17,7 +16,6 @@ export function TopBar({ user }: { user: PosUser }) {
       </div>
       <div className="topbar-actions">
         <div className="user-chip">{user.role === "admin" ? "ADMIN" : "STAFF"}</div>
-        <BackupButton />
         <form action={logout}>
           <Button type="submit" variant="ghost">
             Logout
