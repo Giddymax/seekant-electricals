@@ -22,7 +22,14 @@ export const formatPaymentMethod = (method: string) => {
     case "cash":
       return "Cash";
     case "mobile-money":
+      // legacy value from before payment methods were split by network
       return "Mobile Money";
+    case "momo-mtn":
+      return "Mobile Money (MTN)";
+    case "momo-telecel":
+      return "Mobile Money (Telecel Cash)";
+    case "momo-airteltigo":
+      return "Mobile Money (AirtelTigo)";
     case "card":
       return "Card";
     case "bank-transfer":

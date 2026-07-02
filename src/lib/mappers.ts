@@ -33,6 +33,7 @@ type DbSale = {
   served_by: string;
   subtotal: string | number;
   discount: string | number;
+  tax?: string | number | null;
   total: string | number;
   amount_paid: string | number;
   balance_due: string | number;
@@ -47,6 +48,11 @@ type DbSettings = {
   receipt_prefix: string;
   receipt_footer: string;
   document_title: string;
+  shop_phone?: string | null;
+  shop_address?: string | null;
+  tin?: string | null;
+  tax_label?: string | null;
+  tax_rate?: string | number | null;
 };
 
 const num = (v: string | number | null | undefined) => Number(v ?? 0);
@@ -86,6 +92,7 @@ export const mapSale = (row: DbSale): Sale => ({
   servedBy: row.served_by,
   subtotal: num(row.subtotal),
   discount: num(row.discount),
+  tax: num(row.tax),
   total: num(row.total),
   amountPaid: num(row.amount_paid),
   balanceDue: num(row.balance_due),
@@ -101,4 +108,9 @@ export const mapSettings = (row: DbSettings): PosSettings => ({
   receiptPrefix: row.receipt_prefix,
   receiptFooter: row.receipt_footer,
   documentTitle: row.document_title,
+  shopPhone: row.shop_phone ?? "",
+  shopAddress: row.shop_address ?? "",
+  tin: row.tin ?? "",
+  taxLabel: row.tax_label ?? "VAT",
+  taxRate: num(row.tax_rate),
 });

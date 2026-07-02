@@ -16,6 +16,7 @@ type DraftProduct = {
   category: string;
   dosageForm: string;
   strength: string;
+  manufacturer: string;
   costPrice: string;
   price: string;
   quantity: string;
@@ -29,6 +30,7 @@ const empty: DraftProduct = {
   category: "",
   dosageForm: "",
   strength: "",
+  manufacturer: "",
   costPrice: "",
   price: "",
   quantity: "",
@@ -54,7 +56,7 @@ export function InventoryView({ products, role }: { products: Product[]; role: R
     const term = search.toLowerCase();
     if (!term) return products;
     return products.filter((p) =>
-      [p.name, p.genericName, p.category, p.strength, p.dosageForm]
+      [p.name, p.genericName, p.category, p.strength, p.dosageForm, p.manufacturer]
         .join(" ")
         .toLowerCase()
         .includes(term),
@@ -82,6 +84,7 @@ export function InventoryView({ products, role }: { products: Product[]; role: R
         category: draft.category,
         dosageForm: draft.dosageForm,
         strength: draft.strength,
+        manufacturer: draft.manufacturer,
         costPrice: Number(draft.costPrice) || 0,
         price: Number(draft.price) || 0,
         quantity: Number(draft.quantity) || 0,
@@ -105,6 +108,7 @@ export function InventoryView({ products, role }: { products: Product[]; role: R
       category: product.category,
       dosageForm: product.dosageForm,
       strength: product.strength,
+      manufacturer: product.manufacturer,
       costPrice: String(product.costPrice),
       price: String(product.price),
       quantity: String(product.quantity),
@@ -165,6 +169,14 @@ export function InventoryView({ products, role }: { products: Product[]; role: R
                   <option key={c} value={c} />
                 ))}
               </datalist>
+            </label>
+            <label>
+              Brand / Manufacturer
+              <Input
+                value={draft.manufacturer}
+                onChange={(e) => set("manufacturer", e.target.value)}
+                placeholder="Schneider, CBI, Philips, Luxman..."
+              />
             </label>
             <div className="two-column">
               <label>
@@ -291,6 +303,9 @@ export function InventoryView({ products, role }: { products: Product[]; role: R
                         {product.genericName || "Description not set"} ·{" "}
                         {product.category || "Uncategorized"}
                       </p>
+                      {product.manufacturer ? (
+                        <p className="catalog-submeta">Brand: {product.manufacturer}</p>
+                      ) : null}
                       <p>
                         {product.dosageForm || ""} {product.strength ? `· ${product.strength}` : ""}
                       </p>

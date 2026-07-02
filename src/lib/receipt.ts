@@ -42,6 +42,19 @@ export function buildReceiptHtml(sale: Sale, settings: PosSettings) {
     <div class="receipt">
       <h1>${esc(settings.companyName)}</h1>
       <p class="receipt-subtitle">${esc(settings.receiptTitle)}</p>
+      ${
+        settings.shopPhone || settings.shopAddress || settings.tin
+          ? `<p class="receipt-subtitle">${esc(
+              [
+                settings.shopPhone,
+                settings.shopAddress,
+                settings.tin ? `TIN: ${settings.tin}` : "",
+              ]
+                .filter(Boolean)
+                .join(" · "),
+            )}</p>`
+          : ""
+      }
       <div class="receipt-meta">
         <p><strong>Receipt No:</strong> ${esc(sale.receiptNumber)}</p>
         <p><strong>Date:</strong> ${esc(formatDateTime(sale.createdAt))}</p>
@@ -57,6 +70,11 @@ export function buildReceiptHtml(sale: Sale, settings: PosSettings) {
       <div class="receipt-summary">
         <p><strong>Subtotal:</strong> <span>${formatCurrency(sale.subtotal)}</span></p>
         <p><strong>Discount:</strong> <span>${formatCurrency(sale.discount)}</span></p>
+        ${
+          sale.tax > 0
+            ? `<p><strong>${esc(settings.taxLabel || "Tax")}:</strong> <span>${formatCurrency(sale.tax)}</span></p>`
+            : ""
+        }
         <p><strong>Total:</strong> <span>${formatCurrency(sale.total)}</span></p>
         <p><strong>Paid:</strong> <span>${formatCurrency(sale.amountPaid)}</span></p>
         <p><strong>Balance:</strong> <span>${formatCurrency(sale.balanceDue)}</span></p>

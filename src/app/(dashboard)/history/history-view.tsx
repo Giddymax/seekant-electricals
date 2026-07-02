@@ -266,7 +266,8 @@ export function HistoryView({
                 <p>Served By: {sale.servedBy}</p>
                 <p>
                   Subtotal: {formatCurrency(sale.subtotal)} | Discount:{" "}
-                  {formatCurrency(sale.discount)} | Total:{" "}
+                  {formatCurrency(sale.discount)}
+                  {sale.tax > 0 ? <> | Tax: {formatCurrency(sale.tax)}</> : null} | Total:{" "}
                   <strong>{formatCurrency(sale.total)}</strong>
                 </p>
                 <p>

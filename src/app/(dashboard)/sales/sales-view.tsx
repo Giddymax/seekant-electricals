@@ -32,7 +32,10 @@ export function SalesView({ products, settings }: { products: Product[]; setting
 
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const discountAmount = Math.max(0, Number(discount) || 0);
-  const total = Math.max(0, subtotal - discountAmount);
+  const taxableAmount = Math.max(0, subtotal - discountAmount);
+  const taxRate = Math.max(0, Number(settings.taxRate) || 0);
+  const taxAmount = Math.round(taxableAmount * (taxRate / 100) * 100) / 100;
+  const total = taxableAmount + taxAmount;
   const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const addToCart = (product: Product) => {
@@ -219,6 +222,14 @@ export function SalesView({ products, settings }: { products: Product[]; setting
               <span>Subtotal</span>
               <strong>{formatCurrency(subtotal)}</strong>
             </div>
+            {taxAmount > 0 ? (
+              <div>
+                <span>
+                  {settings.taxLabel || "Tax"} ({taxRate}%)
+                </span>
+                <strong>{formatCurrency(taxAmount)}</strong>
+              </div>
+            ) : null}
             <div>
               <span>Total</span>
               <strong>{formatCurrency(total)}</strong>
@@ -249,7 +260,9 @@ export function SalesView({ products, settings }: { products: Product[]; setting
                 onChange={(e) => setPaymentMethod(e.target.value)}
               >
                 <option value="cash">Cash</option>
-                <option value="mobile-money">Mobile Money</option>
+                <option value="momo-mtn">Mobile Money (MTN)</option>
+                <option value="momo-telecel">Mobile Money (Telecel Cash)</option>
+                <option value="momo-airteltigo">Mobile Money (AirtelTigo)</option>
                 <option value="card">Card</option>
                 <option value="bank-transfer">Bank Transfer</option>
               </select>

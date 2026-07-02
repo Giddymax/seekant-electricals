@@ -13,6 +13,11 @@ export async function loadSettings(): Promise<PosSettings> {
       receiptPrefix: "SEL",
       receiptFooter: "Thank you for choosing Seekant Electricals.",
       documentTitle: "Seekant Electricals",
+      shopPhone: "",
+      shopAddress: "",
+      tin: "",
+      taxLabel: "VAT",
+      taxRate: 0,
     };
   }
   return mapSettings(data);

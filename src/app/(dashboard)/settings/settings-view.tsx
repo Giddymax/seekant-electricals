@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { PosSettings } from "@/lib/types";
+import { formatCurrency } from "@/lib/format";
 import { normalizeReceiptPrefix } from "@/lib/utils";
 import { resetSettings, saveSettings } from "../actions/settings";
 import { RestoreButton } from "./restore-button";
@@ -37,6 +38,9 @@ export function SettingsView({ settings }: { settings: PosSettings }) {
   };
 
   const prefix = normalizeReceiptPrefix(draft.receiptPrefix || "SEL");
+  const previewSubtotal = 36;
+  const previewTax = Math.max(0, Number(draft.taxRate) || 0) * previewSubtotal / 100;
+  const previewTotal = previewSubtotal + previewTax;
 
   return (
     <section>
@@ -89,6 +93,59 @@ export function SettingsView({ settings }: { settings: PosSettings }) {
               onChange={(e) => set("receiptFooter", e.target.value)}
             />
           </label>
+
+          <h4>Shop Contact &amp; Tax Details</h4>
+          <label>
+            Shop Phone Number
+            <Input
+              type="tel"
+              value={draft.shopPhone}
+              onChange={(e) => set("shopPhone", e.target.value)}
+              placeholder="024 000 0000"
+            />
+          </label>
+          <label>
+            Shop Address / Ghana Post GPS
+            <Input
+              value={draft.shopAddress}
+              onChange={(e) => set("shopAddress", e.target.value)}
+              placeholder="GA-123-4567 or shop location"
+            />
+          </label>
+          <label>
+            TIN (Tax Identification Number)
+            <Input
+              value={draft.tin}
+              onChange={(e) => set("tin", e.target.value)}
+              placeholder="GRA TIN, optional"
+            />
+          </label>
+          <div className="two-column">
+            <label>
+              Tax Label
+              <Input
+                value={draft.taxLabel}
+                onChange={(e) => set("taxLabel", e.target.value)}
+                placeholder="VAT"
+              />
+            </label>
+            <label>
+              Tax Rate (%)
+              <Input
+                type="number"
+                min="0"
+                max="100"
+                step="0.01"
+                value={draft.taxRate}
+                onChange={(e) => set("taxRate", Number(e.target.value) || 0)}
+              />
+            </label>
+          </div>
+          <p className="message">
+            Set Tax Rate to 0 to leave tax off receipts. Confirm the correct rate for your
+            business with the Ghana Revenue Authority or your accountant before enabling it.
+          </p>
+
           <div className="button-row">
             <Button type="submit" disabled={pending}>
               {pending ? "Saving..." : "Save Settings"}
@@ -109,6 +166,17 @@ export function SettingsView({ settings }: { settings: PosSettings }) {
           <div className="receipt">
             <h1>{draft.companyName || "Seekant Electricals"}</h1>
             <p className="receipt-subtitle">{draft.receiptTitle}</p>
+            {draft.shopPhone || draft.shopAddress || draft.tin ? (
+              <p className="receipt-subtitle">
+                {[
+                  draft.shopPhone,
+                  draft.shopAddress,
+                  draft.tin ? `TIN: ${draft.tin}` : "",
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </p>
+            ) : null}
             <div className="receipt-meta">
               <p>
                 <strong>Receipt No:</strong> {prefix}-00000001
@@ -154,8 +222,16 @@ export function SettingsView({ settings }: { settings: PosSettings }) {
               <p>
                 <strong>Discount:</strong> <span>GHS 0.00</span>
               </p>
+              {previewTax > 0 ? (
+                <p>
+                  <strong>
+                    {draft.taxLabel || "Tax"} ({draft.taxRate}%):
+                  </strong>{" "}
+                  <span>{formatCurrency(previewTax)}</span>
+                </p>
+              ) : null}
               <p>
-                <strong>Total:</strong> <span>GHS 36.00</span>
+                <strong>Total:</strong> <span>{formatCurrency(previewTotal)}</span>
               </p>
               <p>
                 <strong>Paid:</strong> <span>GHS 20.00</span>

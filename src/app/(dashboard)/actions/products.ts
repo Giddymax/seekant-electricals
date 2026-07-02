@@ -12,6 +12,7 @@ type ProductInput = {
   category: string;
   dosageForm: string;
   strength: string;
+  manufacturer: string;
   costPrice: number;
   price: number;
   quantity: number;
@@ -30,6 +31,7 @@ export async function saveProduct(input: ProductInput) {
     category: input.category.trim(),
     dosage_form: input.dosageForm.trim(),
     strength: input.strength.trim(),
+    manufacturer: input.manufacturer.trim(),
     cost_price: Number(input.costPrice) || 0,
     price: Number(input.price) || 0,
     quantity: Number(input.quantity) || 0,

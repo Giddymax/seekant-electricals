@@ -20,7 +20,7 @@ cp .env.example .env.local   # fill in Supabase keys + device auth password
 npm run dev
 ```
 
-Open <http://localhost:3000>. First visit prompts for the one-time **device authorization password** (default `12Nanakwaku*`, matches the desktop app). Then log in as `admin` / `admin123` or `staff` / `staff123`.
+Open <http://localhost:3000>. Log in as `admin` / `admin123` or `staff` / `staff123`.
 
 ## Supabase setup
 
@@ -29,6 +29,7 @@ Open <http://localhost:3000>. First visit prompts for the one-time **device auth
 3. In the Supabase SQL editor, run:
    - `supabase/schema.sql` — creates tables and seeds the two default users + the settings row
    - `supabase/seed-inventory.sql` — (optional) adds the starter electrical inventory that the desktop app ships with
+   - `supabase/ghana-enhancements.sql` — adds shop contact/TIN details and optional VAT rate to settings (safe to run on an existing database; all changes are additive)
 4. Reload the app.
 
 RLS is intentionally disabled — the Next.js layer authenticates users via a custom cookie and only the server (with the service-role key) touches the database. If you switch to Supabase Auth, enable RLS and add policies.

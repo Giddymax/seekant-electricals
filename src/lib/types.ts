@@ -15,6 +15,11 @@ export interface PosSettings {
   receiptPrefix: string;
   receiptFooter: string;
   documentTitle: string;
+  shopPhone: string;
+  shopAddress: string;
+  tin: string;
+  taxLabel: string;
+  taxRate: number;
 }
 
 export interface Product {
@@ -60,6 +65,7 @@ export interface Sale {
   servedBy: string;
   subtotal: number;
   discount: number;
+  tax: number;
   total: number;
   amountPaid: number;
   balanceDue: number;

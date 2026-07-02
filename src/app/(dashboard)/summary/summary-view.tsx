@@ -81,6 +81,7 @@ export function SummaryView({
         <div class="summary-box"><span>Total Sales</span><strong>${formatCurrency(summary.totalSales)}</strong></div>
         <div class="summary-box"><span>Total Profit</span><strong>${formatCurrency(summary.totalProfit)}</strong></div>
         <div class="summary-box"><span>Discounts Given</span><strong>${formatCurrency(summary.totalDiscounts)}</strong></div>
+        <div class="summary-box"><span>Tax Collected</span><strong>${formatCurrency(summary.totalTax)}</strong></div>
         <div class="summary-box"><span>Part Payments Due</span><strong>${formatCurrency(summary.totalBalanceDue)}</strong></div>
         <div class="summary-box"><span>Inventory Selling Value</span><strong>${formatCurrency(summary.totalInventoryValue)}</strong></div>
         <div class="summary-box"><span>Total Inventory Cost</span><strong>${formatCurrency(summary.totalInventoryCost)}</strong></div>
@@ -164,6 +165,10 @@ export function SummaryView({
           <article className="stat-card">
             <span>Discounts Given</span>
             <strong>{formatCurrency(summary.totalDiscounts)}</strong>
+          </article>
+          <article className="stat-card">
+            <span>Tax Collected</span>
+            <strong>{formatCurrency(summary.totalTax)}</strong>
           </article>
           <article className="stat-card">
             <span>Part Payments Due</span>

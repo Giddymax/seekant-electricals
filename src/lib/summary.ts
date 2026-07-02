@@ -15,6 +15,7 @@ export interface SummaryResult {
   totalSales: number;
   totalProfit: number;
   totalDiscounts: number;
+  totalTax: number;
   totalBalanceDue: number;
   totalInventoryValue: number;
   totalInventoryCost: number;
@@ -82,6 +83,7 @@ export function buildSummary({ sales, products, range, startDate, endDate }: Sum
     0,
   );
   const totalDiscounts = filtered.reduce((sum, sale) => sum + sale.discount, 0);
+  const totalTax = filtered.reduce((sum, sale) => sum + (sale.tax || 0), 0);
   const totalBalanceDue = filtered.reduce((sum, sale) => sum + saleBalance(sale), 0);
   const itemsSold = filtered.reduce(
     (sum, sale) => sum + sale.items.reduce((s, i) => s + i.quantity, 0),
@@ -135,6 +137,7 @@ export function buildSummary({ sales, products, range, startDate, endDate }: Sum
     totalSales,
     totalProfit,
     totalDiscounts,
+    totalTax,
     totalBalanceDue,
     totalInventoryValue,
     totalInventoryCost,

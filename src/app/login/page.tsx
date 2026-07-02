@@ -15,6 +15,11 @@ async function loadSettings() {
         receiptPrefix: "SEL",
         receiptFooter: "Thank you for choosing Seekant Electricals.",
         documentTitle: "Seekant Electricals",
+        shopPhone: "",
+        shopAddress: "",
+        tin: "",
+        taxLabel: "VAT",
+        taxRate: 0,
       };
 }
 
