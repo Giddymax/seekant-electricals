@@ -15,10 +15,20 @@ const NAV = [
   { href: "/settings", label: "Settings", roles: ["admin"] as Role[] },
 ];
 
-export function Sidebar({ settings, role }: { settings: PosSettings; role: Role }) {
+export function Sidebar({
+  settings,
+  role,
+  open = false,
+  onNavigate,
+}: {
+  settings: PosSettings;
+  role: Role;
+  open?: boolean;
+  onNavigate?: () => void;
+}) {
   const pathname = usePathname();
   return (
-    <aside className="sidebar">
+    <aside className={cn("sidebar", open && "sidebar-open")}>
       <div>
         <div className="brand-mark">
           <Image
@@ -41,6 +51,7 @@ export function Sidebar({ settings, role }: { settings: PosSettings; role: Role 
               key={item.href}
               href={item.href}
               className={cn("tab-btn", active && "active")}
+              onClick={onNavigate}
             >
               {item.label}
             </Link>

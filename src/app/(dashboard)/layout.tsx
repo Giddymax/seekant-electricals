@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { Sidebar } from "@/components/Sidebar";
+import { SidebarShell } from "@/components/SidebarShell";
 import { TopBar } from "@/components/TopBar";
 import { StatsBar } from "@/components/StatsBar";
 import { getSessionUser } from "@/lib/session";
@@ -17,8 +17,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div className="app-shell">
-      <Sidebar settings={settings} role={user.role} />
-      <main style={{ padding: 28 }}>
+      <SidebarShell settings={settings} role={user.role} />
+      <main className="dashboard-main" style={{ padding: 28 }}>
         <TopBar user={user} />
         <StatsBar products={products} sales={sales} />
         {children}
