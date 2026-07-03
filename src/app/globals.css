@@ -53,7 +53,20 @@ button, input, select, textarea { font: inherit; }
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(244, 251, 255, 0.35) transparent;
 }
+.sidebar::-webkit-scrollbar { width: 8px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(244, 251, 255, 0.35);
+  border-radius: 999px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover { background: rgba(244, 251, 255, 0.55); }
 
 .brand-mark {
   width: calc(100% + 56px);
@@ -262,7 +275,12 @@ button[disabled] { opacity: 0.5; cursor: not-allowed; }
   .app-shell, .hero-panel, .layout-grid, .sales-layout, .stats-grid, .summary-grid, .storage-grid, .analysis-grid, .settings-layout {
     grid-template-columns: 1fr;
   }
-  .sidebar { padding-bottom: 10px; }
+  .sidebar {
+    padding-bottom: 10px;
+    position: static;
+    height: auto;
+    overflow-y: visible;
+  }
 }
 
 .mobile-menu-btn { display: none; }
